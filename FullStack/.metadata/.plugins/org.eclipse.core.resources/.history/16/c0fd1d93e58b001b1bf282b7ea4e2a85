@@ -1,0 +1,5 @@
+package br.com.paulohenrique.fullstackwrek.resources;
+
+public class PessoaResource {
+
+}

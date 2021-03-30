@@ -1,0 +1,22 @@
+package br.com.paulohenrique.fullstackwrek.resources;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.paulohenrique.fullstackwrek.domain.Pessoa;
+import br.com.paulohenrique.fullstackwrek.respository.PessoaRepository;
+
+@RestController
+@RequestMapping("/pessoas")
+public class PessoaResource {
+	
+	@Autowired
+	private PessoaRepository pessoaRepositoy;
+	
+	public List<Pessoa> listarTodos(){
+		
+	}
+}

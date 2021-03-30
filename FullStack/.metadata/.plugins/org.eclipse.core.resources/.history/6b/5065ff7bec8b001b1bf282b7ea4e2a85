@@ -1,0 +1,51 @@
+package br.com.paulohenrique.fullstackwrek.resources;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.paulohenrique.fullstackwrek.domain.GruposPrioridades;
+import br.com.paulohenrique.fullstackwrek.domain.Pessoa;
+import br.com.paulohenrique.fullstackwrek.respository.GruposPrioridadesRepository;
+import br.com.paulohenrique.fullstackwrek.respository.PessoaRepository;
+
+@RestController
+@RequestMapping("/gruposprioridades")
+public class GruposPrioridadesResource {
+	
+	@Autowired
+	private GruposPrioridadesRepository gruposprioridadesRepositoy;
+	
+	@GetMapping
+	public List<GruposPrioridades> listarTodos(){
+		return gruposprioridadesRepositoy.findAll();
+	}
+	
+	@PostMapping
+	public GruposPrioridades cadatrarPessoa(@RequestBody GruposPrioridades gruposprioridades){
+		return gruposprioridadesRepositoy.save(gruposprioridades);
+	}
+	
+
+	@PutMapping("/{codigo}")
+	public Pessoa atualizar(@PathVariable ("codigo") Long codigo,@RequestBody GruposPrioridades gruposprioridades){
+		return gruposprioridadesRepositoy.findById(codigo).map(
+				record -> {
+					record.setDescricao(gruposprioridades.getDescricao());
+					record.setNome(gruposprioridades.getNome());
+				}).orElse(null);
+	}
+	
+	@GetMapping("/{codigo}")
+	public Pessoa buscarPeloCodigo(@PathVariable ("codigo") Long codigo){
+		return pessoaRepositoy.findById(codigo).orElse(null);
+	}
+
+}
